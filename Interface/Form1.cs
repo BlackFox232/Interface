@@ -8,22 +8,26 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using BDKS_06;
+using System.IO;
 
 namespace Interface
 {
     public partial class Form1 : Form
     {
+        int index { get; set; }
+        Port port = new Port();
+
         public Form1()
         {
 
             InitializeComponent();
 
-            availablePorts.Items.AddRange(JobsWithoutData.GetPortsName());
+            availablePorts.Items.AddRange(port.GetPortsName());
         }
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            JobsWithoutData.SetPort(availablePorts.Text);
+            port.SetPort(availablePorts.Text);
         }
 
         private void label1_Click(object sender, EventArgs e)
@@ -33,7 +37,7 @@ namespace Interface
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            portStatus.Text = JobsWithoutData.StatusPort();
+            portStatus.Text = port.StatusPort();
         }
 
         private void textBox1_TextChanged(object sender, EventArgs e)
@@ -50,33 +54,34 @@ namespace Interface
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-
+            
         }
-
+        
         private void button1_Click(object sender, EventArgs e)
         {
+            byte[] Am;
 
-
-
-            if (JobsWithoutData.StatusPort() == "Порт закрыт")
+            if (port.StatusPort() == "Порт закрыт")
             {
                 MessageBox.Show("Откройте порт");
             }
+            else if (index == 0)
+            {
+                MessageBox.Show("Выберите команду ");
+            }
             else
             {
-                byte[] am = { 0x1, 0x7 };
-
-                am = JobsWithoutData.Write(am);
-
-                for (int i = 0; i < am.Length; i++)
+                Am = Commands.Comm2(0x61,0xA8, 0x4E,0x20);
+                
+                for (int i = 0; i < Am.Length; i++)
                 {
-                    outputText.Text += am[i].ToString("x");
+                    outputText.Text += Am[i].ToString("");
                     outputText.Text += " ";
                 }
-
-                //outputText.Text += Form.ToString("/n");
-
-                portStatus.Text = JobsWithoutData.StatusPort();
+               
+                outputText.Text += "\n";
+                
+                portStatus.Text = port.StatusPort();
             }
         }
 
@@ -84,19 +89,29 @@ namespace Interface
         {
 
         }
-
+        
         private void button2_Click(object sender, EventArgs e)
         {
-            JobsWithoutData.ClosePort();
-            portStatus.Text = JobsWithoutData.StatusPort();
+            port.ClosePort();
+            portStatus.Text = port.StatusPort();
         }
 
         private void button3_Click(object sender, EventArgs e)
         {
-            JobsWithoutData.OpenPort();
-            portStatus.Text = JobsWithoutData.StatusPort();
+            port.OpenPort();
+            portStatus.Text = port.StatusPort();
         }
 
-        private void Form1_FormClosed(object sender, FormClosedEventArgs e) => JobsWithoutData.ClosePort();
+        private void Form1_FormClosed(object sender, FormClosedEventArgs e) => port.ClosePort();
+
+        private void command_SelectionChangeCommitted(object sender, EventArgs e)
+        {
+
+        }
+
+        private void command_SelectedIndexChanged(object sender, EventArgs e)
+        {
+             index = command.SelectedIndex + 1;   
+        }
     }
 }

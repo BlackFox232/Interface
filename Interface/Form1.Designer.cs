@@ -62,10 +62,15 @@
             // command
             // 
             this.command.FormattingEnabled = true;
+            this.command.Items.AddRange(new object[] {
+            "Cчитать слово состояния",
+            "Считать состояние двоичных регистров "});
             this.command.Location = new System.Drawing.Point(222, 1);
             this.command.Name = "command";
             this.command.Size = new System.Drawing.Size(438, 21);
             this.command.TabIndex = 2;
+            this.command.SelectedIndexChanged += new System.EventHandler(this.command_SelectedIndexChanged);
+            this.command.SelectionChangeCommitted += new System.EventHandler(this.command_SelectionChangeCommitted);
             // 
             // label2
             // 
