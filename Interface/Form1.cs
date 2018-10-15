@@ -60,6 +60,7 @@ namespace Interface
         private void button1_Click(object sender, EventArgs e)
         {
             byte[] Am;
+            int cnt = 0;
 
             if (port.StatusPort() == "Порт закрыт")
             {
@@ -71,14 +72,17 @@ namespace Interface
             }
             else
             {
-                Am = Commands.Comm2(0x61,0xA8, 0x4E,0x20);
-                
-                for (int i = 0; i < Am.Length; i++)
+
+                Am = Commands.Comm3(0x1000,0x1500);
+
+                foreach (var item in Am)
                 {
-                    outputText.Text += Am[i].ToString("");
-                    outputText.Text += " ";
+                    
+                    outputText.Text += Am[cnt].ToString("x");
+                    outputText.Text += "check ";
+                    cnt++;
                 }
-               
+
                 outputText.Text += "\n";
                 
                 portStatus.Text = port.StatusPort();
