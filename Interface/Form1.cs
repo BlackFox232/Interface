@@ -28,6 +28,7 @@ namespace Interface
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
             port.SetPort(availablePorts.Text);
+            portStatus.Text = port.StatusPort();
         }
 
         private void label1_Click(object sender, EventArgs e)
@@ -59,28 +60,26 @@ namespace Interface
         
         private void button1_Click(object sender, EventArgs e)
         {
+            HighLevel a = new HighLevel();
+           
             byte[] Am;
-            int cnt = 0;
-
+            
             if (port.StatusPort() == "Порт закрыт")
             {
                 MessageBox.Show("Откройте порт");
             }
-            else if (index == 0)
-            {
-                MessageBox.Show("Выберите команду ");
-            }
+            //else if (index == 0)
+            //{
+            //    MessageBox.Show("Выберите команду ");
+            //}
             else
             {
+                Am = a.Seven();
 
-                Am = Commands.Comm3(0x1000,0x1500);
-
-                foreach (var item in Am)
+                for (int i = 0; i < Am.Length; i++)
                 {
-                    
-                    outputText.Text += Am[cnt].ToString("x");
-                    outputText.Text += "check ";
-                    cnt++;
+                    outputText.Text +="0x"+Am[i].ToString("x");
+                    outputText.Text += " ";
                 }
 
                 outputText.Text += "\n";
@@ -116,6 +115,16 @@ namespace Interface
         private void command_SelectedIndexChanged(object sender, EventArgs e)
         {
              index = command.SelectedIndex + 1;   
+        }
+
+        private void richTextBox1_TextChanged_1(object sender, EventArgs e)
+        {
+
+        }
+
+        private void availablePorts_MouseClick(object sender, MouseEventArgs e)
+        {
+            portStatus.Text = port.StatusPort();
         }
     }
 }

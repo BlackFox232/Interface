@@ -48,6 +48,7 @@
             this.availablePorts.Size = new System.Drawing.Size(53, 21);
             this.availablePorts.TabIndex = 0;
             this.availablePorts.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
+            this.availablePorts.MouseClick += new System.Windows.Forms.MouseEventHandler(this.availablePorts_MouseClick);
             // 
             // label1
             // 
