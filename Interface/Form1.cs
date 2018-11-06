@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -15,7 +16,8 @@ namespace Interface
 {
     public partial class Form1 : Form
     {
-        Port port = new Port();
+        private Port port = new Port();
+        private static int CommandIndex { get; set; }
 
         public Form1()
         {
@@ -23,43 +25,34 @@ namespace Interface
 
             availablePorts.Items.AddRange(port.GetPortsName());
         }
-
-        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        //Установка имени порта
+        private void ComboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
+            port.ClosePort();
             port.SetPortName(availablePorts.Text);
             portStatus.Text = port.StatusPort();
-        }
-
-        private void label1_Click(object sender, EventArgs e)
-        {
-
         }
 
         private void Form1_Load(object sender, EventArgs e)
         {
             portStatus.Text = port.StatusPort();
-
-
         }
 
-        private void textBox1_TextChanged(object sender, EventArgs e)
+        //Цвет статуса порта
+        private void TextBox1_TextChanged(object sender, EventArgs e)
         {
             if (portStatus.Text == "Порт закрыт")
             {
-                this.portStatus.ForeColor = System.Drawing.Color.OrangeRed;
+                this.portStatus.ForeColor = Color.OrangeRed;
             }
             else
             {
-                this.portStatus.ForeColor = System.Drawing.Color.LightGreen;
+                this.portStatus.ForeColor = Color.LightGreen;
             }
         }
 
-        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-
-        }
-
-        private void button1_Click(object sender, EventArgs e)
+        //Выполнение команды
+        private void Button1_Click_1(object sender, EventArgs e)
         {
 
             if (portStatus.Text == "Порт закрыт")
@@ -72,108 +65,215 @@ namespace Interface
             }
             else
             {
-                byte[] Am = new byte[] { };
                 HighLevel high = new HighLevel();
-                string textCom;
-                int k;
 
-                textCom = command.Text;
-                k = textCom.IndexOf(".");
-
-                textCom = textCom.Substring(0, k);
-                Int32.TryParse(textCom, out k);
+                byte[] workBytes = new byte[] { };
+                ushort ush1, ush2, ush3, ush4;
+                byte by1, by2, by3, by4, by5, by6, by7, by8;
+                string bits;
 
                 try
                 {
-                    switch (k)
+                    switch (CommandIndex)
                     {
                         case 2:
-                            ushort a, b;
-                            a = ushort.Parse(ushort1.Text);
-                            b = ushort.Parse(ushort2.Text);
 
-                            Am = high.Second(a, b);
+                            ush1 = ushort.Parse(ushort1.Text);
+                            ush2 = ushort.Parse(ushort2.Text);
+
+                            workBytes = high.Second(ush1, ush2);
+                            ShowAnswerBytes(workBytes);
+
                             break;
+
                         case 3:
-                            Show1();
+
+                            ush1 = ushort.Parse(ushort1.Text);
+                            ush2 = ushort.Parse(ushort2.Text);
+
+                            workBytes = high.Third(ush1, ush2);
+                            ShowAnswerBytes(workBytes);
+
                             break;
+
                         case 4:
-                            Show1();
+
+                            ush1 = ushort.Parse(ushort1.Text);
+                            ush2 = ushort.Parse(ushort2.Text);
+
+                            workBytes = high.Fourth(ush1, ush2);
+                            ShowAnswerBytes(workBytes);
+
                             break;
+
                         case 5:
-                            Show1();
+
+                            ush1 = ushort.Parse(ushort1.Text);
+                            ush2 = ushort.Parse(ushort2.Text);
+
+                            workBytes = high.Fifth(ush1, ush2);
+                            ShowAnswerBytes(workBytes);
+
                             break;
+
                         case 6:
-                            Show1();
+
+                            ush1 = ushort.Parse(ushort1.Text);
+                            ush2 = ushort.Parse(ushort2.Text);
+
+                            workBytes = high.Sixth(ush1, ush2);
+                            ShowAnswerBytes(workBytes);
+
                             break;
+
                         case 7:
-                            Am = high.Seventh();
+
+                            workBytes = high.Seventh();
+                            ShowAnswerBytes(workBytes);
+                            workBytes = Decode.GetAnswerBytes(workBytes);
+
+                            if (workBytes.Length == 1)
+                            {
+                                string[] statusWord;
+
+                                bits = Decode.GetBits(workBytes[0]);
+                                statusWord = Decode.DecodeSeventh(bits);
+
+                                foreach (var item in statusWord)
+                                {
+                                    outputText.Text += item;
+                                    outputText.Text += "\n";
+                                }
+                                outputText.Text += "\n";
+                            }
+
+                            else return;
+
                             break;
+
                         case 8:
-                            Show2();
+
+                            ush1 = ushort.Parse(ushort1.Text);
+                            by1 = byte.Parse(byte1.Text);
+                            by2 = byte.Parse(byte2.Text);
+
+                            workBytes = high.Eighth(ush1, by1, by2);
+                            ShowAnswerBytes(workBytes);
+
                             break;
+
                         case 9:
-                            Show5();
+
+                            by1 = byte.Parse(byte1.Text);
+                            ush1 = ushort.Parse(ushort1.Text);
+                            ush2 = ushort.Parse(ushort2.Text);
+                            ush3 = ushort.Parse(ushort3.Text);
+
+                            workBytes = high.Nineth(by1, ush1, ush2, ush3);
+                            ShowAnswerBytes(workBytes);
+
                             break;
+
                         case 10:
-                            Show8();
+
+                            by1 = byte.Parse(byte1.Text);
+                            ush1 = ushort.Parse(ushort1.Text);
+                            ush2 = ushort.Parse(ushort2.Text);
+                            ush3 = ushort.Parse(ushort3.Text);
+                            by3 = byte.Parse(byte3.Text);
+                            by4 = byte.Parse(byte4.Text);
+                            by5 = byte.Parse(byte5.Text);
+                            by6 = byte.Parse(byte6.Text);
+                            by7 = byte.Parse(byte7.Text);
+                            by8 = byte.Parse(byte8.Text);
+
+                            workBytes = high.Tenth(by1, ush1, ush2, ush3, by3, by4, by5, by6, by7, by8);
+                            ShowAnswerBytes(workBytes);
+
                             break;
+
                         case 11:
-                            Show3();
+
+                            by1 = byte.Parse(byte1.Text);
+                            ush1 = ushort.Parse(ushort1.Text);
+                            ush2 = ushort.Parse(ushort2.Text);
+
+                            workBytes = high.Eleventh(by1, ush1, ush2);
+                            ShowAnswerBytes(workBytes);
+
                             break;
+
                         case 16:
-                            Show6();
+
+                            by1 = byte.Parse(byte1.Text);
+                            ush1 = ushort.Parse(ushort1.Text);
+                            ush2 = ushort.Parse(ushort2.Text);
+                            ush3 = ushort.Parse(ushort3.Text);
+                            ush4 = ushort.Parse(ushort4.Text);
+
+                            workBytes = high.Sixteenth(by1, ush1, ush2, ush3, ush4);
+                            ShowAnswerBytes(workBytes);
+
                             break;
+
                         case 17:
+
+                            workBytes = high.Seventeenth();
+                            ShowAnswerBytes(workBytes);
+
                             break;
+
                         case 18:
-                            Show3();
+
+                            by1 = byte.Parse(byte1.Text);
+                            ush1 = ushort.Parse(ushort1.Text);
+                            ush2 = ushort.Parse(ushort2.Text);
+
+                            workBytes = high.Eightteenth(by1, ush1, ush2);
+                            ShowAnswerBytes(workBytes);
+
                             break;
+
                         case 19:
-                            Show7();
+
+                            by1 = byte.Parse(byte1.Text);
+                            ush1 = ushort.Parse(ushort1.Text);
+                            ush2 = ushort.Parse(ushort2.Text);
+                            by3 = byte.Parse(byte3.Text);
+                            by4 = byte.Parse(byte3.Text);
+                            by5 = byte.Parse(byte3.Text);
+                            by6 = byte.Parse(byte3.Text);
+
+                            workBytes = high.Nineteenth(by1, ush1, ush2, by3, by4, by5, by6);
+                            ShowAnswerBytes(workBytes);
+
                             break;
                     }
-
-                    Am = Decode.GetDecodeValues(Am);
-
-                    for (int i = 0; i < Am.Length; i++)
-                    {
-                        outputText.Text += Am[i].ToString("x");
-                        outputText.Text += " ";
-                    }
-
-                    outputText.Text += "\n";
-                    portStatus.Text = port.StatusPort();
                 }
-                catch(OverflowException)
+                catch (OverflowException)
                 {
-                    MessageBox.Show("Слишком большое или слишком маленькое значение одного из аргументов");
+                    MessageBox.Show("Слишком большое или слишком маленькое значение одного из аргументов,OfverflowException");
                 }
                 catch (ArgumentException)
                 {
-                    MessageBox.Show("Один из аргументов имеет недопустимый формат");
+                    MessageBox.Show("Один из аргументов имеет недопустимый формат,ArgumentException");
                 }
                 catch (FormatException)
                 {
-                    MessageBox.Show("Введите корректные значения");
+                    MessageBox.Show("Введите корректные значения,FormatException");
                 }
-                
             }
-
         }
 
-        private void richTextBox1_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button2_Click(object sender, EventArgs e)
+        //Закрыть порт
+        private void Button2_Click(object sender, EventArgs e)
         {
             port.ClosePort();
             portStatus.Text = port.StatusPort();
         }
 
-        private void button3_Click(object sender, EventArgs e)
+        //Открыть порт
+        private void Button3_Click(object sender, EventArgs e)
         {
             port.OpenPort();
             portStatus.Text = port.StatusPort();
@@ -181,36 +281,14 @@ namespace Interface
 
         private void Form1_FormClosed(object sender, FormClosedEventArgs e) => port.ClosePort();
 
-        private void command_SelectionChangeCommitted(object sender, EventArgs e)
+        //Отображение полей для ввода аргументов
+        private void Command_SelectedValueChanged(object sender, EventArgs e)
         {
-
-        }
-
-        private void command_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            command.Text = "";
-
-        }
-
-        private void richTextBox1_TextChanged_1(object sender, EventArgs e)
-        {
-
-        }
-
-        private void command_SelectedValueChanged(object sender, EventArgs e)
-        {
-            string textCom;
-            int k;
-
-            textCom = command.Text;
-            k = textCom.IndexOf(".");
-
-            textCom = textCom.Substring(0, k);
-            Int32.TryParse(textCom, out k);
+            CommandIndex = GetCommandIndex();
 
             Hide();
 
-            switch (k)
+            switch (CommandIndex)
             {
                 case 2:
                     Show1();
@@ -254,6 +332,29 @@ namespace Interface
                     Show7();
                     break;
             }
+        }
+
+        // Индекс команды для реализации логики выбора одной из доступных 18 команд
+        private int GetCommandIndex()
+        {
+            string textCom;
+            int index;
+
+            textCom = command.Text;
+            index = textCom.IndexOf(".");
+
+            textCom = textCom.Substring(0, index);
+            Int32.TryParse(textCom, out index);
+
+            return index;
+        }
+
+        //Нажатие на выбор порта реализующий обновление списка доступных COM портов
+        private void AvailablePorts_MouseClick(object sender, MouseEventArgs e)
+        {
+            availablePorts.Text = "";
+            availablePorts.Items.Clear();
+            availablePorts.Items.AddRange(port.GetPortsName());
         }
     }
 }

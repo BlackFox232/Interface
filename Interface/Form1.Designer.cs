@@ -38,7 +38,7 @@
             this.outputText = new System.Windows.Forms.RichTextBox();
             this.button2 = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
-            this.label5 = new System.Windows.Forms.Label();
+            this.textArg = new System.Windows.Forms.Label();
             this.b1 = new System.Windows.Forms.Label();
             this.b2 = new System.Windows.Forms.Label();
             this.us1 = new System.Windows.Forms.Label();
@@ -63,6 +63,7 @@
             this.byte6 = new System.Windows.Forms.TextBox();
             this.byte7 = new System.Windows.Forms.TextBox();
             this.byte8 = new System.Windows.Forms.TextBox();
+            this.label4 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // availablePorts
@@ -72,7 +73,8 @@
             this.availablePorts.Name = "availablePorts";
             this.availablePorts.Size = new System.Drawing.Size(53, 21);
             this.availablePorts.TabIndex = 0;
-            this.availablePorts.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
+            this.availablePorts.SelectedIndexChanged += new System.EventHandler(this.ComboBox1_SelectedIndexChanged);
+            this.availablePorts.MouseClick += new System.Windows.Forms.MouseEventHandler(this.AvailablePorts_MouseClick);
             // 
             // label1
             // 
@@ -91,6 +93,8 @@
             this.command.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.command.BackColor = System.Drawing.SystemColors.Window;
+            this.command.ForeColor = System.Drawing.Color.Black;
             this.command.FormattingEnabled = true;
             this.command.Items.AddRange(new object[] {
             "2.Считать состояние двоичных сигналов",
@@ -111,9 +115,7 @@
             this.command.Name = "command";
             this.command.Size = new System.Drawing.Size(566, 21);
             this.command.TabIndex = 2;
-            this.command.SelectedIndexChanged += new System.EventHandler(this.command_SelectedIndexChanged);
-            this.command.SelectionChangeCommitted += new System.EventHandler(this.command_SelectionChangeCommitted);
-            this.command.SelectedValueChanged += new System.EventHandler(this.command_SelectedValueChanged);
+            this.command.SelectedValueChanged += new System.EventHandler(this.Command_SelectedValueChanged);
             // 
             // label2
             // 
@@ -146,7 +148,7 @@
             this.portStatus.Name = "portStatus";
             this.portStatus.Size = new System.Drawing.Size(61, 49);
             this.portStatus.TabIndex = 5;
-            this.portStatus.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
+            this.portStatus.TextChanged += new System.EventHandler(this.TextBox1_TextChanged);
             // 
             // button1
             // 
@@ -156,7 +158,7 @@
             this.button1.TabIndex = 7;
             this.button1.Text = "Выполнить команду";
             this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.button1.Click += new System.EventHandler(this.Button1_Click_1);
             // 
             // outputText
             // 
@@ -165,10 +167,10 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.outputText.Location = new System.Drawing.Point(222, 140);
             this.outputText.Name = "outputText";
+            this.outputText.ReadOnly = true;
             this.outputText.Size = new System.Drawing.Size(566, 194);
             this.outputText.TabIndex = 8;
             this.outputText.Text = "";
-            this.outputText.TextChanged += new System.EventHandler(this.richTextBox1_TextChanged);
             // 
             // button2
             // 
@@ -178,7 +180,7 @@
             this.button2.TabIndex = 9;
             this.button2.Text = "Закрыть порт";
             this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
+            this.button2.Click += new System.EventHandler(this.Button2_Click);
             // 
             // button3
             // 
@@ -188,17 +190,17 @@
             this.button3.TabIndex = 10;
             this.button3.Text = "Открыть порт";
             this.button3.UseVisualStyleBackColor = true;
-            this.button3.Click += new System.EventHandler(this.button3_Click);
+            this.button3.Click += new System.EventHandler(this.Button3_Click);
             // 
-            // label5
+            // textArg
             // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(102, 99);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(121, 13);
-            this.label5.TabIndex = 13;
-            this.label5.Text = "Аргументы команды : ";
-            this.label5.Visible = false;
+            this.textArg.AutoSize = true;
+            this.textArg.Location = new System.Drawing.Point(102, 99);
+            this.textArg.Name = "textArg";
+            this.textArg.Size = new System.Drawing.Size(121, 13);
+            this.textArg.TabIndex = 13;
+            this.textArg.Text = "Аргументы команды : ";
+            this.textArg.Visible = false;
             // 
             // b1
             // 
@@ -416,12 +418,23 @@
             this.byte8.TabIndex = 37;
             this.byte8.Visible = false;
             // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.ForeColor = System.Drawing.Color.DarkRed;
+            this.label4.Location = new System.Drawing.Point(338, 17);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(205, 13);
+            this.label4.TabIndex = 38;
+            this.label4.Text = "АРГУМЕНТЫ ВВОДЯТСЯ В 10тичке !!!";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.label4);
             this.Controls.Add(this.byte8);
             this.Controls.Add(this.byte7);
             this.Controls.Add(this.byte6);
@@ -446,7 +459,7 @@
             this.Controls.Add(this.us1);
             this.Controls.Add(this.b2);
             this.Controls.Add(this.b1);
-            this.Controls.Add(this.label5);
+            this.Controls.Add(this.textArg);
             this.Controls.Add(this.button3);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.outputText);
@@ -478,7 +491,7 @@
         private System.Windows.Forms.RichTextBox outputText;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button button3;
-        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label textArg;
         private System.Windows.Forms.Label b1;
         private System.Windows.Forms.Label b2;
         private System.Windows.Forms.Label us1;
@@ -503,6 +516,7 @@
         private System.Windows.Forms.TextBox byte6;
         private System.Windows.Forms.TextBox byte7;
         private System.Windows.Forms.TextBox byte8;
+        private System.Windows.Forms.Label label4;
     }
 }
 

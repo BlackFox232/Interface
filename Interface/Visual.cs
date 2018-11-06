@@ -6,10 +6,24 @@ using System.Threading.Tasks;
 
 namespace Interface
 {
-    public partial class Form1 
+    //Визуальная логика. Вывод необходимых полей для ввода , их сокрытие , отображение байтов ответа.
+    public partial class Form1
     {
+        private void ShowAnswerBytes(byte[] answer)
+        {
+            for (int i = 0; i < answer.Length; i++)
+            {
+                outputText.Text += answer[i].ToString("x");
+                outputText.Text += " ";
+            }
+
+            outputText.Text += "\n";
+            portStatus.Text = port.StatusPort();
+        }
+
         private void Show1()
         {
+            textArg.Visible = true;
             us1.Visible = true;
             us2.Visible = true;
             ushort1.Visible = true;
@@ -18,6 +32,7 @@ namespace Interface
 
         private void Show2()
         {
+            textArg.Visible = true;
             b1.Visible = true;
             b2.Visible = true;
             byte1.Visible = true;
@@ -28,6 +43,7 @@ namespace Interface
 
         private void Show3()
         {
+            textArg.Visible = true;
             b1.Visible = true;
             byte1.Visible = true;
             us1.Visible = true;
@@ -40,6 +56,7 @@ namespace Interface
 
         private void Show5()
         {
+            textArg.Visible = true;
             b1.Visible = true;
             byte1.Visible = true;
             us1.Visible = true;
@@ -52,6 +69,7 @@ namespace Interface
 
         private void Show6()
         {
+            textArg.Visible = true;
             b1.Visible = true;
             byte1.Visible = true;
             us1.Visible = true;
@@ -66,24 +84,26 @@ namespace Interface
 
         private void Show7()
         {
+            textArg.Visible = true;
             b1.Visible = true;
             byte1.Visible = true;
             us1.Visible = true;
             us2.Visible = true;
             ushort1.Visible = true;
             ushort2.Visible = true;
-            b2.Visible = true;
             b3.Visible = true;
             b4.Visible = true;
             b5.Visible = true;
-            byte2.Visible = true;
+            b6.Visible = true;
             byte3.Visible = true;
             byte4.Visible = true;
             byte5.Visible = true;
+            byte6.Visible = true;
         }
 
         private void Show8()
         {
+            textArg.Visible = true;
             b1.Visible = true;
             byte1.Visible = true;
             us1.Visible = true;
@@ -92,22 +112,23 @@ namespace Interface
             ushort1.Visible = true;
             ushort2.Visible = true;
             ushort3.Visible = true;
-            b2.Visible = true;
             b3.Visible = true;
             b4.Visible = true;
             b5.Visible = true;
             b6.Visible = true;
             b7.Visible = true;
-            byte2.Visible = true;
+            b8.Visible = true;
             byte3.Visible = true;
             byte4.Visible = true;
             byte5.Visible = true;
             byte6.Visible = true;
             byte7.Visible = true;
+            byte8.Visible = true;
         }
 
         private new void Hide()
         {
+            textArg.Visible = false;
             b1.Visible = false;
             byte1.Visible = false;
             us1.Visible = false;
