@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace Interface
 {
     
-    //Расшифровка ответа команд
+    
     internal static class Decode
     {
         public static string[] DecodeThird(byte[] bytes)
@@ -20,7 +20,7 @@ namespace Interface
                 regControl[0] += "Время накопления в секундах : " + BitConverter.ToUInt16(new[] { bytes[1], bytes[0] }, 0);
                 regControl[1] += "Время измерения бета : " + BitConverter.ToUInt16(new[] { bytes[3], bytes[2] }, 0);
                 regControl[2] += "Время измерения альфа : " + BitConverter.ToUInt16(new[] { bytes[5], bytes[4] }, 0);
-                regControl[3] += "Код управления усилением с учетом температурной коррекции : " + BitConverter.ToUInt16(new[] { bytes[7], bytes[6] }, 0); // показывает 400 при диапазоне 255 и тут и в ATerminal,спросить
+                regControl[3] += "Код управления усилением с учетом температурной коррекции : " + BitConverter.ToUInt16(new[] { bytes[7], bytes[6] }, 0); // ПОКАЗЫВАЕТ 400 ПРИ ДОПУСТИМОМ МАКСИМУМ 255 И ТУТ И В ATerminal ,СПРОСИТЬ
             }
 
             if (bytes.Length <= 8) // Проверка на то, содержит ли массив больше 4 первых ushort  
@@ -35,6 +35,7 @@ namespace Interface
                         regControl[0] += "Время накопления в секундах : " + BitConverter.ToUInt16(new[]{ bytes[1], bytes[0] },0);
 
                         break;
+
                     case 4:
 
                         regControl[0] += "Время накопления в секундах : " + BitConverter.ToUInt16(new[] { bytes[1], bytes[0] }, 0);
@@ -49,6 +50,7 @@ namespace Interface
                         regControl[2] += "Время измерения альфа : " + BitConverter.ToUInt16(new[] { bytes[5], bytes[4] }, 0);
 
                         break;
+
                     case 8:
 
                         FirstFourBytes();
@@ -82,7 +84,7 @@ namespace Interface
 
         public static void GetFloat()
         {
-
+            
         }
 
         public static string[] DecodeSeventh(string bits)
