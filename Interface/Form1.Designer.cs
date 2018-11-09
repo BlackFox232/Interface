@@ -165,10 +165,10 @@
             this.outputText.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.outputText.Location = new System.Drawing.Point(222, 140);
+            this.outputText.Location = new System.Drawing.Point(5, 140);
             this.outputText.Name = "outputText";
             this.outputText.ReadOnly = true;
-            this.outputText.Size = new System.Drawing.Size(566, 194);
+            this.outputText.Size = new System.Drawing.Size(783, 194);
             this.outputText.TabIndex = 8;
             this.outputText.Text = "";
             // 

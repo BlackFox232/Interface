@@ -19,10 +19,18 @@
                 outputText.Text += " ";
             }
 
-            outputText.Text += "\n";
             portStatus.Text = port.StatusPort();
         }
 
+        private void ShowAnswerText(string[] text)
+        {
+            foreach (var item in text)
+            {
+                outputText.Text += item;
+                outputText.Text += "\n";
+            }
+        }
+        // Отображение одной из 8 возможных комбинаций полей для ввода аргументов
         private void Show1()
         {
             textArg.Visible = true;

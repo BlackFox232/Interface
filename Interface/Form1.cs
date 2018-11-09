@@ -25,6 +25,7 @@ namespace Interface
 
             availablePorts.Items.AddRange(port.GetPortsName());
         }
+
         //Установка имени порта
         private void ComboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -93,14 +94,12 @@ namespace Interface
                             workBytes = high.Third(ush1, ush2);
                             ShowAnswerBytes(workBytes);
                             workBytes = Decode.GetAnswerBytes(workBytes,numberParity:true);
-                            
+
                             string[] decodeText = Decode.DecodeThird(workBytes);
 
-                            foreach (var item in decodeText)
-                            {
-                                outputText.Text += item;
-                                outputText.Text += "\n";
-                            }
+                            ShowAnswerText(decodeText);
+                          
+
                             break;
 
                         case 4:
@@ -146,14 +145,9 @@ namespace Interface
                                 bits = Decode.GetBits(workBytes[0]);
                                 statusWord = Decode.DecodeSeventh(bits);
 
-                                foreach (var item in statusWord)
-                                {
-                                    outputText.Text += item;
-                                    outputText.Text += "\n";
-                                }
-                                outputText.Text += "\n";
+                                ShowAnswerText(statusWord);
+                                
                             }
-
                             else return;
 
                             break;
