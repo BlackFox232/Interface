@@ -89,16 +89,17 @@ namespace Interface
                             
                             ush1 = ushort.Parse(ushort1.Text);
                             ush2 = ushort.Parse(ushort2.Text);
-
+                            
                             workBytes = high.Third(ush1, ush2);
                             ShowAnswerBytes(workBytes);
-                            workBytes = Decode.GetAnswerBytes(workBytes);
+                            workBytes = Decode.GetAnswerBytes(workBytes,numberParity:true);
+                            
+                            string[] decodeText = Decode.DecodeThird(workBytes);
 
-                            outputText.Text += "\n";
-                            foreach (var item in workBytes)
+                            foreach (var item in decodeText)
                             {
-                                outputText.Text += item.ToString("X") + " ";
-                                
+                                outputText.Text += item;
+                                outputText.Text += "\n";
                             }
                             break;
 

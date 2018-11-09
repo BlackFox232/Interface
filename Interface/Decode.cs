@@ -6,20 +6,81 @@ using System.Threading.Tasks;
 
 namespace Interface
 {
+    
     //Расшифровка ответа команд
     internal static class Decode
     {
-        public static void DecodeThird(byte[] bytes)
+        public static string[] DecodeThird(byte[] bytes)
         {
-            
+            string[] regControl;
+            int cnt = 0;;
+
+            void FirstFourBytes()
+            {
+                regControl[0] += "Время накопления в секундах : " + BitConverter.ToUInt16(new[] { bytes[1], bytes[0] }, 0);
+                regControl[1] += "Время измерения бета : " + BitConverter.ToUInt16(new[] { bytes[3], bytes[2] }, 0);
+                regControl[2] += "Время измерения альфа : " + BitConverter.ToUInt16(new[] { bytes[5], bytes[4] }, 0);
+                regControl[3] += "Код управления усилением с учетом температурной коррекции : " + BitConverter.ToUInt16(new[] { bytes[7], bytes[6] }, 0); // показывает 400 при диапазоне 255 и тут и в ATerminal,спросить
+            }
+
+            if (bytes.Length <= 8) // Проверка на то, содержит ли массив больше 4 первых ushort  
+            {
+                regControl = new string[bytes.Length/2]; // Массив содержащий состояния в строковом представлении 
+                cnt = bytes.Length;
+
+                switch (cnt) // Проверка на кол-во считанных регистров и присвоение регистрам их состояния 
+                {
+                    case 2:
+
+                        regControl[0] += "Время накопления в секундах : " + BitConverter.ToUInt16(new[]{ bytes[1], bytes[0] },0);
+
+                        break;
+                    case 4:
+
+                        regControl[0] += "Время накопления в секундах : " + BitConverter.ToUInt16(new[] { bytes[1], bytes[0] }, 0);
+                        regControl[1] += "Время измерения бета : " + BitConverter.ToUInt16(new[] { bytes[3], bytes[2] }, 0);
+
+                        break;
+
+                    case 6:
+
+                        regControl[0] += "Время накопления в секундах : " + BitConverter.ToUInt16(new[] { bytes[1], bytes[0] }, 0);
+                        regControl[1] += "Время измерения бета : " + BitConverter.ToUInt16(new[] { bytes[3], bytes[2] }, 0);
+                        regControl[2] += "Время измерения альфа : " + BitConverter.ToUInt16(new[] { bytes[5], bytes[4] }, 0);
+
+                        break;
+                    case 8:
+
+                        FirstFourBytes();
+
+                        break;
+                }
+            }
+            else
+            {
+                cnt = bytes.Length - 8;
+                cnt = cnt / 4;
+
+                regControl = new string[bytes.Length / 2];
+                FirstFourBytes();
+
+            }
+
+            return regControl;
         }
 
         public static void DecodeFourth()
         {
-
+            //400
+            //0xfff0
         }
 
         public static void DecodeFifth()
+        {
+
+        }
+
+        public static void GetFloat()
         {
 
         }
@@ -137,33 +198,57 @@ namespace Interface
             return s;
         }
 
-        /// <summary>
-        /// Получить байты ответа без CRC , адреса и номера команды
-        /// </summary>
-        /// <param name="val">Массив с CRC ,адресом и номером команды </param>
-        /// <returns>Массив без CRC,адреса и команды</returns>
-        public static byte[] GetAnswerBytes(byte[] val)
-        {
-            byte[] _val = new byte[val.Length - 4];
+        //Выделить байты ответа убрав CRC,адрес,номер команды и если имеется путём привсвоения numberParity значения true убрать так же кол-во байт ответа в рабочем массиве
+        public static byte[] GetAnswerBytes(byte[] val,bool numberParity = false)
+        {           
             int cnt = 0;
             int i = 0;
+            byte[] _val;
 
-            foreach (var item in val)
+            if (numberParity = false)
             {
-                if (cnt == 1 || cnt == 0)
-                {
+                _val = new byte[val.Length - 4];
 
-                }
-                else if (cnt == val.Length - 1 || cnt == val.Length - 2)
+                foreach (var item in val)
                 {
+                    if (cnt == 1 || cnt == 0)
+                    {
 
+                    }
+                    else if (cnt == val.Length - 1 || cnt == val.Length - 2)
+                    {
+
+                    }
+                    else
+                    {
+                        _val[i] = item;
+                        i++;
+                    }
+                    cnt++;
                 }
-                else
+
+            }
+            else
+            {
+                _val = new byte[val.Length - 5];
+
+                foreach (var item in val)
                 {
-                    _val[i] = item;
-                    i++;
+                    if (cnt == 1 || cnt == 0 || cnt == 2)
+                    {
+
+                    }
+                    else if (cnt == val.Length - 1 || cnt == val.Length - 2)
+                    {
+
+                    }
+                    else
+                    {
+                        _val[i] = item;
+                        i++;
+                    }
+                    cnt++;
                 }
-                cnt++;
             }
 
             return _val;

@@ -5,6 +5,14 @@
     {
         private void ShowAnswerBytes(byte[] answer)
         {
+            if (outputText.Text == "")
+            {
+
+            }
+            else  { outputText.Text += "\n"; }
+
+            outputText.Text += "<< ";
+
             for (int i = 0; i < answer.Length; i++)
             {
                 outputText.Text += answer[i].ToString("x");
