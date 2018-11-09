@@ -133,8 +133,8 @@ namespace Interface
 
                             break;
 
-                        case 7:
-
+                        case 7:                           
+                            
                             workBytes = high.Seventh();
                             ShowAnswerBytes(workBytes);
                             workBytes = Decode.GetAnswerBytes(workBytes);
