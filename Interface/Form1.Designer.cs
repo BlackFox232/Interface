@@ -324,6 +324,8 @@
             // 
             // byte1
             // 
+            this.byte1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
             this.byte1.Location = new System.Drawing.Point(222, 96);
             this.byte1.Name = "byte1";
             this.byte1.Size = new System.Drawing.Size(33, 20);
@@ -332,6 +334,8 @@
             // 
             // byte2
             // 
+            this.byte2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
             this.byte2.Location = new System.Drawing.Point(264, 96);
             this.byte2.Name = "byte2";
             this.byte2.Size = new System.Drawing.Size(33, 20);
@@ -340,6 +344,8 @@
             // 
             // ushort1
             // 
+            this.ushort1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
             this.ushort1.Location = new System.Drawing.Point(306, 96);
             this.ushort1.Name = "ushort1";
             this.ushort1.Size = new System.Drawing.Size(42, 20);
@@ -348,6 +354,8 @@
             // 
             // ushort2
             // 
+            this.ushort2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
             this.ushort2.Location = new System.Drawing.Point(357, 96);
             this.ushort2.Name = "ushort2";
             this.ushort2.Size = new System.Drawing.Size(42, 20);
@@ -356,6 +364,8 @@
             // 
             // ushort3
             // 
+            this.ushort3.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
             this.ushort3.Location = new System.Drawing.Point(408, 96);
             this.ushort3.Name = "ushort3";
             this.ushort3.Size = new System.Drawing.Size(42, 20);
@@ -364,6 +374,8 @@
             // 
             // ushort4
             // 
+            this.ushort4.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
             this.ushort4.Location = new System.Drawing.Point(459, 96);
             this.ushort4.Name = "ushort4";
             this.ushort4.Size = new System.Drawing.Size(42, 20);
@@ -372,6 +384,8 @@
             // 
             // byte3
             // 
+            this.byte3.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
             this.byte3.Location = new System.Drawing.Point(510, 96);
             this.byte3.Name = "byte3";
             this.byte3.Size = new System.Drawing.Size(33, 20);
@@ -380,6 +394,8 @@
             // 
             // byte4
             // 
+            this.byte4.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
             this.byte4.Location = new System.Drawing.Point(552, 96);
             this.byte4.Name = "byte4";
             this.byte4.Size = new System.Drawing.Size(33, 20);
@@ -388,6 +404,8 @@
             // 
             // byte5
             // 
+            this.byte5.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
             this.byte5.Location = new System.Drawing.Point(594, 96);
             this.byte5.Name = "byte5";
             this.byte5.Size = new System.Drawing.Size(33, 20);
@@ -396,6 +414,8 @@
             // 
             // byte6
             // 
+            this.byte6.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
             this.byte6.Location = new System.Drawing.Point(636, 96);
             this.byte6.Name = "byte6";
             this.byte6.Size = new System.Drawing.Size(33, 20);
@@ -404,6 +424,8 @@
             // 
             // byte7
             // 
+            this.byte7.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
             this.byte7.Location = new System.Drawing.Point(678, 96);
             this.byte7.Name = "byte7";
             this.byte7.Size = new System.Drawing.Size(33, 20);
@@ -412,6 +434,8 @@
             // 
             // byte8
             // 
+            this.byte8.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
             this.byte8.Location = new System.Drawing.Point(717, 96);
             this.byte8.Name = "byte8";
             this.byte8.Size = new System.Drawing.Size(33, 20);
@@ -421,12 +445,12 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.ForeColor = System.Drawing.Color.DarkRed;
-            this.label4.Location = new System.Drawing.Point(338, 17);
+            this.label4.ForeColor = System.Drawing.Color.Black;
+            this.label4.Location = new System.Drawing.Point(279, 17);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(205, 13);
+            this.label4.Size = new System.Drawing.Size(217, 13);
             this.label4.TabIndex = 38;
-            this.label4.Text = "АРГУМЕНТЫ ВВОДЯТСЯ В 10тичке !!!";
+            this.label4.Text = "аргументы вводятся в 10ричной системе";
             // 
             // Form1
             // 

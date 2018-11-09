@@ -9,7 +9,22 @@ namespace Interface
     //Расшифровка ответа команд
     internal static class Decode
     {
-        static public string[] DecodeSeventh(string bits)
+        public static void DecodeThird(byte[] bytes)
+        {
+            
+        }
+
+        public static void DecodeFourth()
+        {
+
+        }
+
+        public static void DecodeFifth()
+        {
+
+        }
+
+        public static string[] DecodeSeventh(string bits)
         {
             string[] statusBDKS = new string[7] ;
 
@@ -36,7 +51,7 @@ namespace Interface
             else
             {
                 statusBDKS[2] += "Измерение альфа запрещено";
-            }
+            } 
             if (bits[3] == '1')
             {
                 statusBDKS[3] += "Режим вычитания фона альфа включен";
@@ -77,7 +92,7 @@ namespace Interface
         {
             string s = "";
             byte[] bits = new byte[] { };
-        
+          
             if (BitConverter.IsLittleEndian)
             {
                 bits = new byte[]

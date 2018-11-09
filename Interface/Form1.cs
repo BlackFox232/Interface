@@ -54,7 +54,6 @@ namespace Interface
         //Выполнение команды
         private void Button1_Click_1(object sender, EventArgs e)
         {
-
             if (portStatus.Text == "Порт закрыт")
             {
                 MessageBox.Show("Откройте порт");
@@ -87,13 +86,20 @@ namespace Interface
                             break;
 
                         case 3:
-
+                            
                             ush1 = ushort.Parse(ushort1.Text);
                             ush2 = ushort.Parse(ushort2.Text);
 
                             workBytes = high.Third(ush1, ush2);
                             ShowAnswerBytes(workBytes);
+                            workBytes = Decode.GetAnswerBytes(workBytes);
 
+                            outputText.Text += "\n";
+                            foreach (var item in workBytes)
+                            {
+                                outputText.Text += item.ToString("X") + " ";
+                                
+                            }
                             break;
 
                         case 4:
@@ -349,7 +355,7 @@ namespace Interface
             return index;
         }
 
-        //Нажатие на выбор порта реализующий обновление списка доступных COM портов
+        //Нажатие на выбор порта реализующее обновление списка доступных COM портов
         private void AvailablePorts_MouseClick(object sender, MouseEventArgs e)
         {
             availablePorts.Text = "";

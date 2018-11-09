@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Interface
+﻿namespace Interface
 {
-    //Визуальная логика. Вывод необходимых полей для ввода , их сокрытие , отображение байтов ответа.
+    //Визуальная логика. Вывод необходимых textBox для ввода аргументов , их сокрытие , отображение байтов ответа.
     public partial class Form1
     {
         private void ShowAnswerBytes(byte[] answer)
@@ -51,8 +45,6 @@ namespace Interface
             ushort1.Visible = true;
             ushort2.Visible = true;
         }
-
-
 
         private void Show5()
         {
