@@ -20,22 +20,22 @@ namespace Interface
                 if (i < 4)  //первые 8 байт компануем по 2, как ты и просил
                 {
                     OutputArr[i] = new byte[2];
-                    OutputArr[i][0] = InputArr[i * 2];
-                    OutputArr[i][1] = InputArr[i * 2 + 1];
+                    OutputArr[i][1] = InputArr[i * 2];
+                    OutputArr[i][0] = InputArr[i * 2 + 1];
                 }
                 else //все остальные компануем по 4
                 {
                     OutputArr[i] = new byte[4];
-                    OutputArr[i][0] = InputArr[(i - 3) * 4 + 4];
-                    OutputArr[i][1] = InputArr[(i - 3) * 4 + 5];
-                    OutputArr[i][2] = InputArr[(i - 3) * 4 + 6];
-                    OutputArr[i][3] = InputArr[(i - 3) * 4 + 7];
+                    OutputArr[i][3] = InputArr[(i - 3) * 4 + 4];
+                    OutputArr[i][2] = InputArr[(i - 3) * 4 + 5];
+                    OutputArr[i][1] = InputArr[(i - 3) * 4 + 6];
+                    OutputArr[i][0] = InputArr[(i - 3) * 4 + 7];
                 }
 
             }
             return OutputArr;
         }
-
+    
         public static string[] DecodeThird(byte[] bytes)
         {
             string[] regControl = {
@@ -47,32 +47,47 @@ namespace Interface
             "«Фоновое» значение скорости счета для режима вычитания фона в формате с плавающей точкой, s-1,  ст. 16 бит. : ",
             "«Фоновое» значение скорости счета для режима вычитания фона в формате с плавающей точкой, s-1,  ст. 16 бит. : ",
             "«Фоновое» значение мощности дозы для режима вычитания фона в формате с плавающей точкой, ст. 16 бит. Размерность (Sv/h, rem/h или R/h) определяется значением 2-го регистра управления : ",
-            "Статистическая погрешность «фонового» значения мощности дозы в формате с плавающей точкой, %, мл. 16 бит : "
+            "Статистическая погрешность «фонового» значения мощности дозы в формате с плавающей точкой, %, мл. 16 бит : ",
+            " "
             };
 
+            byte[][] statuses = MySortMethod(bytes);
 
-            
-
-            byte[][] Statuses = MySortMethod(bytes);
-
-            for (int i = 0; i < Statuses.Length; i++)
+            void Convertation(int i)
             {
                 if (i < 4)
                 {
-                    regControl[i] += BitConverter.ToUInt16(Statuses[i], 0);
+                    regControl[i] += BitConverter.ToUInt16(statuses[i], 0);
                 }
                 else
                 {
-                    regControl[i] += BitConverter.ToSingle(Statuses[i], 0);
-                }                
+                    regControl[i] += BitConverter.ToSingle(statuses[i], 0);
+                }
             }
 
+            int cnt = statuses.Length;
+            
+            if (statuses.Length >9)
+            {
+                for (int i = 0; i < 9; i++)
+                {
+                    Convertation(i);
+                }
+                regControl[regControl.Length - 1] +=" Расшифровка остальных состояний не предусмотрена";
+            }
+            else
+            {
+                for (int i = 0; i < statuses.Length; i++)
+                {
+                    Convertation(i);
+                }
+            }
+            
             return regControl;
 
         }
 
-            
-    
+
 
         public static void DecodeFourth()
         {
