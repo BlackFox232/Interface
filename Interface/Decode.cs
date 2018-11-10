@@ -10,139 +10,63 @@ namespace Interface
 
     internal static class Decode
     {
+        static byte[][] MySortMethod(byte[] InputArr)
+        {
+            int OutputArrLength = InputArr.Length / 4 + 2; //вычисляем длину малого массива исходя из длины бОльшего(изначального)
+            byte[][] OutputArr = new byte[OutputArrLength][];
+
+            for (int i = 0; i < OutputArrLength; i++)
+            {
+                if (i < 4)  //первые 8 байт компануем по 2, как ты и просил
+                {
+                    OutputArr[i] = new byte[2];
+                    OutputArr[i][0] = InputArr[i * 2];
+                    OutputArr[i][1] = InputArr[i * 2 + 1];
+                }
+                else //все остальные компануем по 4
+                {
+                    OutputArr[i] = new byte[4];
+                    OutputArr[i][0] = InputArr[(i - 3) * 4 + 4];
+                    OutputArr[i][1] = InputArr[(i - 3) * 4 + 5];
+                    OutputArr[i][2] = InputArr[(i - 3) * 4 + 6];
+                    OutputArr[i][3] = InputArr[(i - 3) * 4 + 7];
+                }
+
+            }
+            return OutputArr;
+        }
+
         public static string[] DecodeThird(byte[] bytes)
         {
-            string[] regControl;
-            int cnt = 0; ;
+            string[] regControl = {
+            "Время накопления в секундах : ",
+            "Время измерения бета : ",
+            "Время измерения альфа : ",
+            "Код управления усилением с учетом температурной коррекции : ",
+            "«Базовое» значение скорости счета для поискового режима в формате с плавающей точкой, s - 1, ст. 16 бит : ",
+            "«Фоновое» значение скорости счета для режима вычитания фона в формате с плавающей точкой, s-1,  ст. 16 бит. : ",
+            "«Фоновое» значение скорости счета для режима вычитания фона в формате с плавающей точкой, s-1,  ст. 16 бит. : ",
+            "«Фоновое» значение мощности дозы для режима вычитания фона в формате с плавающей точкой, ст. 16 бит. Размерность (Sv/h, rem/h или R/h) определяется значением 2-го регистра управления : ",
+            "Статистическая погрешность «фонового» значения мощности дозы в формате с плавающей точкой, %, мл. 16 бит : "
+            };
 
-            void FirstFourBytes()
-            {
-                regControl[0] += "Время накопления в секундах : "
-                    + BitConverter.ToUInt16(new[] { bytes[1], bytes[0] }, 0);
-                regControl[1] += "Время измерения бета : "
-                    + BitConverter.ToUInt16(new[] { bytes[3], bytes[2] }, 0);
-                regControl[2] += "Время измерения альфа : "
-                    + BitConverter.ToUInt16(new[] { bytes[5], bytes[4] }, 0);
-                regControl[3] += "Код управления усилением с учетом температурной коррекции : "
-                    + BitConverter.ToUInt16(new[] { bytes[7], bytes[6] }, 0); // ПОКАЗЫВАЕТ 400 ПРИ ДОПУСТИМОМ МАКСИМУМ 255 И ТУТ И В ATerminal ,СПРОСИТЬ
-            }
 
-            void NextFiveFloats()
-            {
-                regControl[4] += "«Базовое» значение скорости счета для поискового режима в формате с плавающей точкой, s - 1, ст. 16 бит : "
-                            + BitConverter.ToSingle(new[] { bytes[11], bytes[10], bytes[9], bytes[8] }, 0);
-                regControl[5] += "«Фоновое» значение скорости счета для режима вычитания фона в формате с плавающей точкой, s-1,  ст. 16 бит. : "
-                    + BitConverter.ToSingle(new[] { bytes[15], bytes[14], bytes[13], bytes[12] }, 0);
-                regControl[6] += "Статистическая погрешность «фонового» значения скорости счета в формате с плавающей точкой, %, ст. 16 бит : "
-                    + BitConverter.ToSingle(new[] { bytes[19], bytes[18], bytes[17], bytes[16] }, 0);
-                regControl[7] += "«Фоновое» значение мощности дозы для режима вычитания фона в формате с плавающей точкой, ст. 16 бит. Размерность (Sv/h, rem/h или R/h) определяется значением 2-го регистра управления : "
-                    + BitConverter.ToSingle(new[] { bytes[23], bytes[22], bytes[21], bytes[20] }, 0);
-                regControl[8] += "Статистическая погрешность «фонового» значения мощности дозы в формате с плавающей точкой, %, мл. 16 бит : "
-                    + BitConverter.ToSingle(new[] { bytes[27], bytes[26], bytes[25], bytes[24] }, 0);
-            }
-
-            if (bytes.Length <= 8) // Проверка на то, содержит ли массив больше 4 первых ushort  
-            {
-                regControl = new string[bytes.Length / 2]; // Массив содержащий состояния регистров первых 4 ushort в строковом представлении 
-                cnt = bytes.Length/2;//получаем кол-во ushort необходимых для расшифровки
-
-                switch (cnt) // Проверка на кол-во считанных регистров и присвоение регистрам их состояния 
-                {
-                    case 1:
-
-                        regControl[0] += "Время накопления в секундах : "
-                            + BitConverter.ToUInt16(new[] { bytes[1], bytes[0] }, 0);
-
-                        break;
-
-                    case 2:
-
-                        regControl[0] += "Время накопления в секундах : "
-                            + BitConverter.ToUInt16(new[] { bytes[1], bytes[0] }, 0);
-                        regControl[1] += "Время измерения бета : "
-                            + BitConverter.ToUInt16(new[] { bytes[3], bytes[2] }, 0);
-
-                        break;
-
-                    case 3:
-
-                        regControl[0] += "Время накопления в секундах : "
-                            + BitConverter.ToUInt16(new[] { bytes[1], bytes[0] }, 0);
-                        regControl[1] += "Время измерения бета : "
-                            + BitConverter.ToUInt16(new[] { bytes[3], bytes[2] }, 0);
-                        regControl[2] += "Время измерения альфа : "
-                            + BitConverter.ToUInt16(new[] { bytes[5], bytes[4] }, 0);
-
-                        break;
-
-                    case 4:
-
-                        FirstFourBytes();
-
-                        break;
-                }
-            }
-            else if (bytes.Length <= 28) // последующих 5 float
-            {
-
-                cnt = bytes.Length - 8; // убираем 8 байт первых четырёх ushort
-                cnt /= 4; // получаем количество float 
-                cnt += 4; // добавляем первые 4 ushort
-                regControl = new string[cnt]; // присваиваем массиву ответа кол-во состояний 
-                cnt -= 4; // убираем первые 4 ushort
-
-                FirstFourBytes();
-
-                switch (cnt) // в зависимости от кол-ва float-ов расшифровка
-                {
-                    case 1:
-                        regControl[4] += "«Базовое» значение скорости счета для поискового режима в формате с плавающей точкой, s - 1, ст. 16 бит : "
-                            + BitConverter.ToSingle(new[] { bytes[11], bytes[10], bytes[9], bytes[8] }, 0); break;
-
-                    case 2:
-                        regControl[4] += "«Базовое» значение скорости счета для поискового режима в формате с плавающей точкой, s - 1, ст. 16 бит : "
-                            + BitConverter.ToSingle(new[] { bytes[11], bytes[10], bytes[9], bytes[8] }, 0);
-                        regControl[5] += "«Фоновое» значение скорости счета для режима вычитания фона в формате с плавающей точкой, s-1,  ст. 16 бит. : "
-                            + BitConverter.ToSingle(new[] { bytes[15], bytes[14], bytes[13], bytes[12] }, 0);
-
-                        break;
-
-                    case 3:
-                        regControl[4] += "«Базовое» значение скорости счета для поискового режима в формате с плавающей точкой, s - 1, ст. 16 бит : "
-                            + BitConverter.ToSingle(new[] { bytes[11], bytes[10], bytes[9], bytes[8] }, 0);
-                        regControl[5] += "«Фоновое» значение скорости счета для режима вычитания фона в формате с плавающей точкой, s-1,  ст. 16 бит. : "
-                            + BitConverter.ToSingle(new[] { bytes[15], bytes[14], bytes[13], bytes[12] }, 0); regControl[4] += "«Базовое» значение скорости счета для поискового режима в формате с плавающей точкой, s - 1, ст. 16 бит : " + BitConverter.ToSingle(new[] { bytes[19], bytes[18], bytes[17], bytes[16] }, 0);
-                        regControl[6] += "Статистическая погрешность «фонового» значения скорости счета в формате с плавающей точкой, %, ст. 16 бит : "
-                            + BitConverter.ToSingle(new[] { bytes[19], bytes[18], bytes[17], bytes[16] }, 0);
-                        break;
-
-                    case 4:
-                        regControl[4] += "«Базовое» значение скорости счета для поискового режима в формате с плавающей точкой, s - 1, ст. 16 бит : "
-                            + BitConverter.ToSingle(new[] { bytes[11], bytes[10], bytes[9], bytes[8] }, 0);
-                        regControl[5] += "«Фоновое» значение скорости счета для режима вычитания фона в формате с плавающей точкой, s-1,  ст. 16 бит. : "
-                            + BitConverter.ToSingle(new[] { bytes[15], bytes[14], bytes[13], bytes[12] }, 0);
-                        regControl[6] += "Статистическая погрешность «фонового» значения скорости счета в формате с плавающей точкой, %, ст. 16 бит : "
-                            + BitConverter.ToSingle(new[] { bytes[19], bytes[18], bytes[17], bytes[16] }, 0);
-                        regControl[7] += "«Фоновое» значение мощности дозы для режима вычитания фона в формате с плавающей точкой, ст. 16 бит. Размерность (Sv/h, rem/h или R/h) определяется значением 2-го регистра управления : "
-                            + BitConverter.ToSingle(new[] { bytes[23], bytes[22], bytes[21], bytes[20] }, 0);
-
-                        break;
-
-                    case 5:
-                        NextFiveFloats();
-                        break;
-                        
-                }
-            }
-            else // больше 4 первых ushort и 5 последующих float
-            {
-                regControl = new string[10];
-                FirstFourBytes();
-                NextFiveFloats();
-                regControl[regControl.Length - 1] += " Расшифровка остальных регистров в разработке ";
-                return regControl;
-            }
             
+
+            byte[][] Statuses = MySortMethod(bytes);
+
+            for (int i = 0; i < Statuses.Length; i++)
+            {
+                if (i < 4)
+                {
+                    regControl[i] += BitConverter.ToUInt16(Statuses[i], 0);
+                }
+                else
+                {
+                    regControl[i] += BitConverter.ToSingle(Statuses[i], 0);
+                }                
+            }
+
             return regControl;
 
         }
@@ -150,7 +74,7 @@ namespace Interface
             
     
 
-    public static void DecodeFourth()
+        public static void DecodeFourth()
         {
 
         }

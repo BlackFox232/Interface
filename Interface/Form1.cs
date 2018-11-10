@@ -95,6 +95,8 @@ namespace Interface
                             ShowAnswerBytes(workBytes);
                             workBytes = Decode.GetAnswerBytes(workBytes,numberParity:true);
 
+                            workBytes = new byte[]{ 0xff,0xf0,0xff,0xf0,0xff,0xf0,0x01,0x90,0x00,0x00,0x00,0x00 };
+
                             string[] decodeText = Decode.DecodeThird(workBytes);
 
                             ShowAnswerText(decodeText);
