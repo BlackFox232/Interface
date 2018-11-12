@@ -64,6 +64,7 @@
             this.byte7 = new System.Windows.Forms.TextBox();
             this.byte8 = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
+            this.button4 = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // availablePorts
@@ -152,7 +153,7 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(5, 56);
+            this.button1.Location = new System.Drawing.Point(5, 36);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(153, 23);
             this.button1.TabIndex = 7;
@@ -165,7 +166,7 @@
             this.outputText.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.outputText.Location = new System.Drawing.Point(5, 140);
+            this.outputText.Location = new System.Drawing.Point(5, 151);
             this.outputText.Name = "outputText";
             this.outputText.ReadOnly = true;
             this.outputText.Size = new System.Drawing.Size(783, 194);
@@ -174,7 +175,7 @@
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(5, 115);
+            this.button2.Location = new System.Drawing.Point(5, 93);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(94, 23);
             this.button2.TabIndex = 9;
@@ -184,7 +185,7 @@
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(5, 85);
+            this.button3.Location = new System.Drawing.Point(5, 65);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(94, 23);
             this.button3.TabIndex = 10;
@@ -452,12 +453,23 @@
             this.label4.TabIndex = 38;
             this.label4.Text = "аргументы вводятся в 10ричной системе";
             // 
+            // button4
+            // 
+            this.button4.Location = new System.Drawing.Point(5, 122);
+            this.button4.Name = "button4";
+            this.button4.Size = new System.Drawing.Size(153, 23);
+            this.button4.TabIndex = 39;
+            this.button4.Text = "Очистить окно вывода";
+            this.button4.UseVisualStyleBackColor = true;
+            this.button4.Click += new System.EventHandler(this.button4_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.button4);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.byte8);
             this.Controls.Add(this.byte7);
@@ -541,6 +553,7 @@
         private System.Windows.Forms.TextBox byte7;
         private System.Windows.Forms.TextBox byte8;
         private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Button button4;
     }
 }
 

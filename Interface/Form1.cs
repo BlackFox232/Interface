@@ -110,6 +110,9 @@ namespace Interface
                             workBytes = high.Fourth(ush1, ush2);
                             ShowAnswerBytes(workBytes);
 
+                            workBytes = Decode.GetAnswerBytes(workBytes, numberParity: true);
+                            outputText.Text += Decode.DecodeFourth(workBytes);
+
                             break;
 
                         case 5:
@@ -356,6 +359,11 @@ namespace Interface
             availablePorts.Text = "";
             availablePorts.Items.Clear();
             availablePorts.Items.AddRange(port.GetPortsName());
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            outputText.Text = "";
         }
     }
 }
