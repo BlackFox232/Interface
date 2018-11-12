@@ -19,6 +19,7 @@
                 outputText.Text += " ";
             }
 
+            outputText.Text += "\n";
             portStatus.Text = port.StatusPort();
         }
 
