@@ -28,37 +28,43 @@ namespace Interface
             " " // Последний элемент для добавления строки "Расшифровка остальных состояний не предусмотрена" на случай ввода более 9 первых регистров
             };
 
-            byte[][] Sorting(byte[] inputArr) // Сортирует входной массив в двумерный в котором первый массив количество регистров а второй их содержимое 
+            byte[][] Sorting(byte[] inputArr)
             {
-                int outputArrLength;
+                int numberRegisters;
 
-                if (inputArr.Length < 8) // Проверка на то больше ли в ответе чем первые 4 ushort регистра
+                if (inputArr.Length <= 8) // Проверка на то больше ли в ответе чем первые 4 ushort регистра
                 {
-                    outputArrLength = inputArr.Length / 2;
+                    numberRegisters = inputArr.Length / 2;
                 }
                 else
                 {
-                    outputArrLength = inputArr.Length / 4 + 2;
+                    numberRegisters = (inputArr.Length - 8) / 4 + 4;
                 }
 
-                byte[][] outputArr = new byte[outputArrLength][];
+                byte[][] outputArr = new byte[numberRegisters][]; // Двумерный массив , первый содержит кол-во регистров второй их содержимое
+                int k = 0;
+                int i = 0;
 
-                for (int i = 0; i < outputArrLength; i++)
+                while (i < numberRegisters)
                 {
                     if (i < 4)  //первые 8 байт компануем по 2
                     {
                         outputArr[i] = new byte[2];
-                        outputArr[i][1] = inputArr[i * 2];
-                        outputArr[i][0] = inputArr[i * 2 + 1];
+                        outputArr[i][1] = inputArr[k];
+                        outputArr[i][0] = inputArr[k + 1];
+                        k = k + 2;
+
                     }
                     else //все остальные компануем по 4
                     {
                         outputArr[i] = new byte[4];
-                        outputArr[i][3] = inputArr[(i - 3) * 4 + 4];
-                        outputArr[i][2] = inputArr[(i - 3) * 4 + 5];
-                        outputArr[i][1] = inputArr[(i - 3) * 4 + 6];
-                        outputArr[i][0] = inputArr[(i - 3) * 4 + 7];
+                        outputArr[i][3] = inputArr[k];
+                        outputArr[i][2] = inputArr[k + 1];
+                        outputArr[i][1] = inputArr[k + 2];
+                        outputArr[i][0] = inputArr[k + 3];
+                        k = k + 4;
                     }
+                    ++i;
                 }
 
                 return outputArr;
@@ -136,49 +142,47 @@ namespace Interface
             " " // Последний элемент для добавления строки "Расшифровка остальных состояний не предусмотрена" на случай ввода более 9 первых регистров
             };
 
-            int Sorting(byte[] inputArr) // Сортирует входной массив в двумерный в котором первый массив количество регистров а второй их содержимое 
+            byte[][] Sorting(byte[] inputArr) // Сортирует входной массив в двумерный в котором первый массив количество регистров а второй их содержимое 
             {
                 int outputArrLength;
 
-                if (inputArr.Length <= 4) // Проверка на то больше ли в ответе чем первые 2 ushort регистра
+                if (inputArr.Length < 8) // Проверка на то больше ли в ответе чем первые 4 ushort регистра
                 {
                     outputArrLength = inputArr.Length / 2;
                 }
-                else if (inputArr.Length < 28)
-                {
-                    outputArrLength = inputArr.Length / 4 + 1;
-                }
                 else
                 {
-                    outputArrLength = inputArr.Length / 4 + 2;
+                    outputArrLength = (inputArr.Length - 8) / 4 + 4;
                 }
 
                 byte[][] outputArr = new byte[outputArrLength][];
+                int k = 0;
+                int i = 0;
 
-                //for (int i = 0; i < outputArrLength; i++)
-                //{
-                //    if (i < 4)  //первые 8 байт компануем по 2
-                //    {
-                //        outputArr[i] = new byte[2];
-                //        outputArr[i][1] = inputArr[i * 2];
-                //        outputArr[i][0] = inputArr[i * 2 + 1];
-                //    }
-                //    else //все остальные компануем по 4
-                //    {
-                //        outputArr[i] = new byte[4];
-                //        outputArr[i][3] = inputArr[(i - 3) * 4 + 4];
-                //        outputArr[i][2] = inputArr[(i - 3) * 4 + 5];
-                //        outputArr[i][1] = inputArr[(i - 3) * 4 + 6];
-                //        outputArr[i][0] = inputArr[(i - 3) * 4 + 7];
-                //    }
-                //}
-
-                return outputArrLength;
+                while (i < outputArrLength)
+                {
+                    if (i < 4)  //первые 8 байт компануем по 2
+                    {
+                        outputArr[i] = new byte[2];
+                        outputArr[i][1] = inputArr[k + 1];
+                        outputArr[i][0] = inputArr[k];
+                        k = k + 2
+    ;
+                    }
+                    else //все остальные компануем по 4
+                    {
+                        outputArr[i] = new byte[4];
+                        outputArr[i][3] = inputArr[k + 3];
+                        outputArr[i][2] = inputArr[k + 2];
+                        outputArr[i][1] = inputArr[k + 1];
+                        outputArr[i][0] = inputArr[k];
+                        k = k + 4;
+                    }
+                    ++i;
+                }
+                return outputArr;
             }
-
-            int z = Sorting(answerBytes);
-            return z;
-           
+            
         }
 
         //05.Подать управляющий сигнал
