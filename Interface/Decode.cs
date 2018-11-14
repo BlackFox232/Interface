@@ -183,12 +183,20 @@ namespace Interface
         public static string[] DecodeFifth(byte[] answerBytes)
         {
             string[] textStatus = new string[1];
-
+            
             ushort[] status = new ushort[2];
+            try
+            {
+                status[0] = BitConverter.ToUInt16(new byte[] { answerBytes[0], answerBytes[1] }, 0);
+                status[1] = BitConverter.ToUInt16(new byte[] { answerBytes[2], answerBytes[3] }, 0);
 
-            status[0] = BitConverter.ToUInt16(new byte[] { answerBytes[0], answerBytes[1] }, 0);
-            status[1] = BitConverter.ToUInt16(new byte[] { answerBytes[2], answerBytes[3] }, 0);
-
+            }
+            catch (IndexOutOfRangeException)
+            {
+                MessageBox.Show("Недопустимое значение команды");
+                return textStatus;
+            }
+            
             switch (status[0])
             {
                 case 256:

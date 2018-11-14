@@ -71,10 +71,11 @@
             // 
             // availablePorts
             // 
+            this.availablePorts.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.availablePorts.FormattingEnabled = true;
-            this.availablePorts.Location = new System.Drawing.Point(105, 9);
+            this.availablePorts.Location = new System.Drawing.Point(104, 3);
             this.availablePorts.Name = "availablePorts";
-            this.availablePorts.Size = new System.Drawing.Size(53, 21);
+            this.availablePorts.Size = new System.Drawing.Size(61, 21);
             this.availablePorts.TabIndex = 0;
             this.availablePorts.SelectedIndexChanged += new System.EventHandler(this.ComboBox1_SelectedIndexChanged);
             this.availablePorts.MouseClick += new System.Windows.Forms.MouseEventHandler(this.AvailablePorts_MouseClick);
@@ -85,7 +86,7 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(2, 9);
+            this.label1.Location = new System.Drawing.Point(1, 3);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(97, 13);
             this.label1.TabIndex = 1;
@@ -96,7 +97,8 @@
             this.command.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.command.BackColor = System.Drawing.SystemColors.Window;
+            this.command.BackColor = System.Drawing.SystemColors.MenuBar;
+            this.command.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.command.ForeColor = System.Drawing.Color.Black;
             this.command.FormattingEnabled = true;
             this.command.Items.AddRange(new object[] {
@@ -126,7 +128,7 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(161, 59);
+            this.label2.Location = new System.Drawing.Point(164, 59);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(55, 13);
             this.label2.TabIndex = 3;
@@ -145,19 +147,22 @@
             // portStatus
             // 
             this.portStatus.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.portStatus.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.portStatus.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.portStatus.ForeColor = System.Drawing.Color.Crimson;
             this.portStatus.Location = new System.Drawing.Point(727, 1);
             this.portStatus.Multiline = true;
             this.portStatus.Name = "portStatus";
+            this.portStatus.ReadOnly = true;
             this.portStatus.Size = new System.Drawing.Size(61, 49);
             this.portStatus.TabIndex = 5;
             this.portStatus.TextChanged += new System.EventHandler(this.TextBox1_TextChanged);
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(5, 36);
+            this.button1.Location = new System.Drawing.Point(4, 30);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(153, 23);
+            this.button1.Size = new System.Drawing.Size(161, 23);
             this.button1.TabIndex = 7;
             this.button1.Text = "Выполнить команду";
             this.button1.UseVisualStyleBackColor = true;
@@ -168,16 +173,17 @@
             this.outputText.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.outputText.Location = new System.Drawing.Point(5, 151);
+            this.outputText.BackColor = System.Drawing.Color.White;
+            this.outputText.Location = new System.Drawing.Point(5, 157);
             this.outputText.Name = "outputText";
             this.outputText.ReadOnly = true;
-            this.outputText.Size = new System.Drawing.Size(783, 194);
+            this.outputText.Size = new System.Drawing.Size(783, 291);
             this.outputText.TabIndex = 8;
             this.outputText.Text = "";
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(5, 93);
+            this.button2.Location = new System.Drawing.Point(4, 88);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(94, 23);
             this.button2.TabIndex = 9;
@@ -187,7 +193,7 @@
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(5, 65);
+            this.button3.Location = new System.Drawing.Point(4, 59);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(94, 23);
             this.button3.TabIndex = 10;
@@ -329,6 +335,8 @@
             // 
             this.byte1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
+            this.byte1.BackColor = System.Drawing.Color.White;
+            this.byte1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.byte1.Location = new System.Drawing.Point(222, 96);
             this.byte1.Name = "byte1";
             this.byte1.Size = new System.Drawing.Size(33, 20);
@@ -339,6 +347,8 @@
             // 
             this.byte2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
+            this.byte2.BackColor = System.Drawing.Color.White;
+            this.byte2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.byte2.Location = new System.Drawing.Point(264, 96);
             this.byte2.Name = "byte2";
             this.byte2.Size = new System.Drawing.Size(33, 20);
@@ -349,6 +359,8 @@
             // 
             this.ushort1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
+            this.ushort1.BackColor = System.Drawing.Color.White;
+            this.ushort1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.ushort1.Location = new System.Drawing.Point(306, 96);
             this.ushort1.Name = "ushort1";
             this.ushort1.Size = new System.Drawing.Size(42, 20);
@@ -359,6 +371,8 @@
             // 
             this.ushort2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
+            this.ushort2.BackColor = System.Drawing.Color.White;
+            this.ushort2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.ushort2.Location = new System.Drawing.Point(357, 96);
             this.ushort2.Name = "ushort2";
             this.ushort2.Size = new System.Drawing.Size(42, 20);
@@ -369,6 +383,8 @@
             // 
             this.ushort3.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
+            this.ushort3.BackColor = System.Drawing.Color.White;
+            this.ushort3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.ushort3.Location = new System.Drawing.Point(408, 96);
             this.ushort3.Name = "ushort3";
             this.ushort3.Size = new System.Drawing.Size(42, 20);
@@ -379,6 +395,8 @@
             // 
             this.ushort4.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
+            this.ushort4.BackColor = System.Drawing.Color.White;
+            this.ushort4.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.ushort4.Location = new System.Drawing.Point(459, 96);
             this.ushort4.Name = "ushort4";
             this.ushort4.Size = new System.Drawing.Size(42, 20);
@@ -389,6 +407,8 @@
             // 
             this.byte3.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
+            this.byte3.BackColor = System.Drawing.Color.White;
+            this.byte3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.byte3.Location = new System.Drawing.Point(510, 96);
             this.byte3.Name = "byte3";
             this.byte3.Size = new System.Drawing.Size(33, 20);
@@ -399,6 +419,8 @@
             // 
             this.byte4.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
+            this.byte4.BackColor = System.Drawing.Color.White;
+            this.byte4.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.byte4.Location = new System.Drawing.Point(552, 96);
             this.byte4.Name = "byte4";
             this.byte4.Size = new System.Drawing.Size(33, 20);
@@ -409,6 +431,8 @@
             // 
             this.byte5.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
+            this.byte5.BackColor = System.Drawing.Color.White;
+            this.byte5.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.byte5.Location = new System.Drawing.Point(594, 96);
             this.byte5.Name = "byte5";
             this.byte5.Size = new System.Drawing.Size(33, 20);
@@ -419,6 +443,8 @@
             // 
             this.byte6.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
+            this.byte6.BackColor = System.Drawing.Color.White;
+            this.byte6.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.byte6.Location = new System.Drawing.Point(636, 96);
             this.byte6.Name = "byte6";
             this.byte6.Size = new System.Drawing.Size(33, 20);
@@ -429,6 +455,8 @@
             // 
             this.byte7.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
+            this.byte7.BackColor = System.Drawing.Color.White;
+            this.byte7.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.byte7.Location = new System.Drawing.Point(678, 96);
             this.byte7.Name = "byte7";
             this.byte7.Size = new System.Drawing.Size(33, 20);
@@ -439,6 +467,8 @@
             // 
             this.byte8.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
+            this.byte8.BackColor = System.Drawing.Color.White;
+            this.byte8.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.byte8.Location = new System.Drawing.Point(717, 96);
             this.byte8.Name = "byte8";
             this.byte8.Size = new System.Drawing.Size(33, 20);
@@ -447,9 +477,9 @@
             // 
             // button4
             // 
-            this.button4.Location = new System.Drawing.Point(5, 122);
+            this.button4.Location = new System.Drawing.Point(4, 128);
             this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(153, 23);
+            this.button4.Size = new System.Drawing.Size(161, 23);
             this.button4.TabIndex = 39;
             this.button4.Text = "Очистить окно вывода";
             this.button4.UseVisualStyleBackColor = true;
@@ -459,7 +489,7 @@
             // 
             this.label4.AutoSize = true;
             this.label4.ForeColor = System.Drawing.Color.Maroon;
-            this.label4.Location = new System.Drawing.Point(164, 28);
+            this.label4.Location = new System.Drawing.Point(195, 119);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(558, 13);
             this.label4.TabIndex = 40;
@@ -470,7 +500,7 @@
             // 
             this.label5.AutoSize = true;
             this.label5.ForeColor = System.Drawing.Color.Maroon;
-            this.label5.Location = new System.Drawing.Point(289, 14);
+            this.label5.Location = new System.Drawing.Point(303, 141);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(265, 13);
             this.label5.TabIndex = 41;
@@ -480,7 +510,7 @@
             // 
             this.label6.AutoSize = true;
             this.label6.ForeColor = System.Drawing.Color.Maroon;
-            this.label6.Location = new System.Drawing.Point(295, 41);
+            this.label6.Location = new System.Drawing.Point(303, 20);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(259, 13);
             this.label6.TabIndex = 42;
@@ -491,6 +521,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.label5);
