@@ -7,13 +7,13 @@ namespace Interface
 {
     public partial class Form1 : Form
     {
-        private Port port = new Port();
+        private Port port = new Port(); //Имя устанавливается в СomboBox avaiblePorts автоматически, по стандарту настроена на : "COM0", 57600, Parity.None, 8, StopBits.Two
         private static int CommandIndex { get; set; }
-
+        
         public Form1()
         {
             InitializeComponent();
-
+            
             availablePorts.Items.AddRange(port.GetPortsName());
         }
 

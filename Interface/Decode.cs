@@ -22,7 +22,7 @@ namespace Interface
         /// <returns>Отсортированный массив</returns>
         static byte[][] Sorting2(byte[] inputArr, int bytesFirstUshorts, int numberFirstUshorts, int bytesDecodeRegister, int maxValuesDecodeRegister) // Сортирует входной массив в двумерный в котором первый массив количество регистров а второй их содержимое 
         {
-            int outputArrLength; // переменная содержащая в себе кол-во статусов регистров
+            int outputArrLength; // Переменная содержащая в себе кол-во состояний регистров
 
             if (inputArr.Length < bytesFirstUshorts) // Проверка на то больше ли в ответе чем первые ushort регистра
             {
@@ -43,14 +43,14 @@ namespace Interface
 
             while (i < outputArrLength)
             {
-                if (i < numberFirstUshorts)  //первые байты ushort команд компонуем по 2
+                if (i < numberFirstUshorts)  //Байты первых ushort реистров компануются по 2
                 {
                     outputArr[i] = new byte[2];
                     outputArr[i][0] = inputArr[k + 1];
                     outputArr[i][1] = inputArr[k];
                     k = k + 2;
                 }
-                else //все остальные компануем по 4
+                else //все остальные компануются по 4
                 {
                     outputArr[i] = new byte[4];
                     outputArr[i][0] = inputArr[k + 3];
@@ -76,7 +76,7 @@ namespace Interface
         {
             void Convertation(int i)
             {
-                if (i < numberFirstUshorts) // проверка на то расшифровываются ли в текущий момент ushort или  float
+                if (i < numberFirstUshorts) // Проверка на то что расшифровывается в текущий момент ushort или float по номеру
                 {
                     answerMas[i] += BitConverter.ToUInt16(registerStatuses[i], 0);
                 }
@@ -100,7 +100,7 @@ namespace Interface
 
                 return answerMas;
             }
-            else // Если нет то обрезаем до нужного
+            else // Если нет то обрезается до нужного
             {
                 for (int i = 0; i < registerStatuses.Length; i++)
                 {
@@ -171,7 +171,7 @@ namespace Interface
 
             " " // Последний элемент для добавления строки "Расшифровка остальных состояний не предусмотрена" на случай ввода более 9 первых регистров
             };
-
+            
             byte[][] statuses = Sorting2(answerBytes, 4, 2, 80, 21);
 
             regDataStatus = GetStatusMas(statuses, 21, regDataStatus, 2);
@@ -187,7 +187,6 @@ namespace Interface
             ushort[] status = new ushort[2];
 
             status[0] = BitConverter.ToUInt16(new byte[] { answerBytes[0], answerBytes[1] }, 0);
-            MessageBox.Show(status[0].ToString());
             status[1] = BitConverter.ToUInt16(new byte[] { answerBytes[2], answerBytes[3] }, 0);
 
             switch (status[0])
