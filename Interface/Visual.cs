@@ -9,7 +9,7 @@
             {
 
             }
-            else  { outputText.Text += "\n"; }
+            else { outputText.Text += "\n"; }
 
             outputText.Text += "<< ";
 

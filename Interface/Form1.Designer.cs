@@ -63,8 +63,9 @@
             this.byte6 = new System.Windows.Forms.TextBox();
             this.byte7 = new System.Windows.Forms.TextBox();
             this.byte8 = new System.Windows.Forms.TextBox();
-            this.label4 = new System.Windows.Forms.Label();
             this.button4 = new System.Windows.Forms.Button();
+            this.label4 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // availablePorts
@@ -124,11 +125,11 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(165, 59);
+            this.label2.Location = new System.Drawing.Point(161, 59);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(58, 13);
+            this.label2.Size = new System.Drawing.Size(55, 13);
             this.label2.TabIndex = 3;
-            this.label2.Text = "Команда :";
+            this.label2.Text = "Команда:";
             // 
             // label3
             // 
@@ -196,11 +197,11 @@
             // textArg
             // 
             this.textArg.AutoSize = true;
-            this.textArg.Location = new System.Drawing.Point(102, 99);
+            this.textArg.Location = new System.Drawing.Point(101, 98);
             this.textArg.Name = "textArg";
-            this.textArg.Size = new System.Drawing.Size(121, 13);
+            this.textArg.Size = new System.Drawing.Size(118, 13);
             this.textArg.TabIndex = 13;
-            this.textArg.Text = "Аргументы команды : ";
+            this.textArg.Text = "Аргументы команды: ";
             this.textArg.Visible = false;
             // 
             // b1
@@ -443,16 +444,6 @@
             this.byte8.TabIndex = 37;
             this.byte8.Visible = false;
             // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.ForeColor = System.Drawing.Color.Black;
-            this.label4.Location = new System.Drawing.Point(279, 17);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(217, 13);
-            this.label4.TabIndex = 38;
-            this.label4.Text = "аргументы вводятся в 10ричной системе";
-            // 
             // button4
             // 
             this.button4.Location = new System.Drawing.Point(5, 122);
@@ -461,7 +452,28 @@
             this.button4.TabIndex = 39;
             this.button4.Text = "Очистить окно вывода";
             this.button4.UseVisualStyleBackColor = true;
-            this.button4.Click += new System.EventHandler(this.button4_Click);
+            this.button4.Click += new System.EventHandler(this.Button4_Click);
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.ForeColor = System.Drawing.Color.DarkRed;
+            this.label4.Location = new System.Drawing.Point(163, 27);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(558, 13);
+            this.label4.TabIndex = 40;
+            this.label4.Text = "Программа адекватно отображает тексты команд 3 и 4 только при считывании(первый u" +
+    "short) начиная с 00";
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.ForeColor = System.Drawing.Color.Navy;
+            this.label5.Location = new System.Drawing.Point(303, 40);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(265, 13);
+            this.label5.TabIndex = 41;
+            this.label5.Text = "байтовое отображение везде работает нормально";
             // 
             // Form1
             // 
@@ -469,8 +481,9 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
             this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Controls.Add(this.button4);
+            this.Controls.Add(this.label5);
             this.Controls.Add(this.label4);
+            this.Controls.Add(this.button4);
             this.Controls.Add(this.byte8);
             this.Controls.Add(this.byte7);
             this.Controls.Add(this.byte6);
@@ -552,8 +565,9 @@
         private System.Windows.Forms.TextBox byte6;
         private System.Windows.Forms.TextBox byte7;
         private System.Windows.Forms.TextBox byte8;
-        private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Button button4;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label label5;
     }
 }
 

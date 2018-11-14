@@ -1,16 +1,7 @@
 ﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using BDKS_06;
-using System.IO;
-using Interface;
 
 namespace Interface
 {
@@ -30,7 +21,9 @@ namespace Interface
         private void ComboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
             port.ClosePort();
+
             port.SetPortName(availablePorts.Text);
+
             portStatus.Text = port.StatusPort();
         }
 
@@ -70,7 +63,7 @@ namespace Interface
                 byte[] workBytes = new byte[] { };
                 ushort ush1, ush2, ush3, ush4;
                 byte by1, by2, by3, by4, by5, by6, by7, by8;
-                string bits;
+                string[] decodeText;
 
                 try
                 {
@@ -93,9 +86,9 @@ namespace Interface
                             
                             workBytes = high.Third(ush1, ush2);
                             ShowAnswerBytes(workBytes);
-                            workBytes = Decode.GetAnswerBytes(workBytes,numberParity:true);
 
-                            string[] decodeText = Decode.DecodeThird(workBytes);
+                            workBytes = Decode.GetAnswerBytes(workBytes,numberParity:true);
+                            decodeText = Decode.DecodeThird(workBytes);
 
                             ShowAnswerText(decodeText);
                           
@@ -111,7 +104,9 @@ namespace Interface
                             ShowAnswerBytes(workBytes);
 
                             workBytes = Decode.GetAnswerBytes(workBytes, numberParity: true);
-                            outputText.Text += Decode.DecodeFourth(workBytes);
+                            decodeText =  Decode.DecodeFourth(workBytes);
+
+                            ShowAnswerText(decodeText);
 
                             break;
 
@@ -122,6 +117,11 @@ namespace Interface
 
                             workBytes = high.Fifth(ush1, ush2);
                             ShowAnswerBytes(workBytes);
+
+                            workBytes = Decode.GetAnswerBytes(workBytes);
+                            decodeText = Decode.DecodeFifth(workBytes);
+
+                            ShowAnswerText(decodeText);
 
                             break;
 
@@ -137,21 +137,14 @@ namespace Interface
 
                         case 7:                           
                             
-                            workBytes = high.Seventh();
+                            workBytes = high.Seventh();                            
                             ShowAnswerBytes(workBytes);
+
                             workBytes = Decode.GetAnswerBytes(workBytes);
 
-                            if (workBytes.Length == 1)
-                            {
-                                string[] statusWord;
-
-                                bits = Decode.GetBits(workBytes[0]);
-                                statusWord = Decode.DecodeSeventh(bits);
-
-                                ShowAnswerText(statusWord);
-                                
-                            }
-                            else return;
+                            decodeText = Decode.DecodeSeventh(workBytes[0]);
+                            
+                            ShowAnswerText(decodeText);
 
                             break;
 
@@ -361,7 +354,7 @@ namespace Interface
             availablePorts.Items.AddRange(port.GetPortsName());
         }
 
-        private void button4_Click(object sender, EventArgs e)
+        private void Button4_Click(object sender, EventArgs e)
         {
             outputText.Text = "";
         }
